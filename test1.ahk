@@ -12,20 +12,28 @@ _joystick1 := "2" ;
 _joystick2 := "5" ;
 _joystickOutput := "1" ;
 _isJoystick := true ;
-
+make_hotkey() 
 
 ; _toggleScriptOn ToggleScript(true)
 ; _toggleScriptOn::{						;toggle the script on.
-Hotkey _toggleScriptOn , ToggleScript	;toggle the script on.
-try
-	Hotkey "^."
-catch TargetError
-	MsgBox "The hotkey does not exist"
+; Hotkey _toggleScriptOn , ToggleScript.Call(A_ThisHotkey, true)	;toggle the script on.
+make_hotkey() {
+var1 := "hi"
+_boundFunc := FunctionABC.Bind(var1)
+Hotkey _toggleScriptOff, _boundFunc
+}
+; try
+; 	Hotkey _toggleScriptOn
+; catch TargetError
+; 	MsgBox "The hotkey does not exist"
 
-ToggleScript(ThisHotKey) {
+ToggleScript(msg) {
 	; global _scriptActive := toggle ;
-	MsgBox "Hello World"
+	MsgBox msg
 } ;
+FunctionABC(ThisHotKey, msg) {
+	MsgBox msg " " ThisHotKey
+}
 ; ^,::{						;toggle the script off.
 ; 	global _scriptActive := false ;
 ; }
